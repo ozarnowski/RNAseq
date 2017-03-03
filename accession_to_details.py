@@ -16,8 +16,4 @@ def openFile(accession):
     output = accession
     for line in s:
         output += '\t' + line.split("\t")[0]
-    print output
-    #return output
-
-x = raw_input()
-openFile(x)
+    return output
