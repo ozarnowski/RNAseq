@@ -1,0 +1,74 @@
+DNA = "AGCCATGTAGCTAACTCAGGTTACATGGGGATGACCCCGCGACTTGGATTAGAGTCTCTTTTGGAATAAGCCTGAATGATCCGAGTAGCATCTCAG"
+
+Dict = { 
+"TTT" : "F"    ,  "CTT" : "L" ,     "ATT": "I"   ,   "GTT": "V" ,
+"TTC" : "F"    ,  "CTC" : "L"  ,    "ATC": "I"  ,    "GTC": "V" ,
+"TTA": "L"    ,  "CTA" : "L"   ,   "ATA": "I"  ,    "GTA": "V",
+"TTG": "L"    ,  "CTG": "L"   ,   "ATG": "M"   ,   "GTG": "V",
+"TCT" : "S"   ,   "CCT": "P"   ,   "ACT": "T"   ,   "GCT" :"A",
+"TCC" : "S"   ,   "CCC": "P"  ,    "ACC": "T"   ,   "GCC" :"A",
+"TCA" : "S"   ,   "CCA": "P"   ,   "ACA": "T"   ,   "GCA" : "A",
+"TCG" : "S"    ,  "CCG" :"P"   ,   "ACG": "T"  ,    "GCG": "A",
+"TAT" : "Y"   ,   "CAT": "H"   ,   "AAT": "N"   ,   "GAT": "D",
+"TAC" : "Y"    ,  "CAC" :"H"   ,   "AAC": "N"   ,   "GAC": "D",
+"TAA" : "Stop"  , "CAA" :"Q"  ,    "AAA": "K"  ,    "GAA": "E",
+"TAG" : "Stop" ,  "CAG" :"Q"  ,   "AAG": "K"   ,   "GAG":"E" ,
+"TGT" : "C"  ,    "CGT" :"R"  ,    "AGT": "S"  ,    "GGT": "G",
+"TGC" : "C"  , "CGC":"R"    ,  "AGC": "S"    ,  "GGC": "G",
+"TGA" :"Stop",   "CGA" :"R"   ,   "AGA": "R"  ,    "GGA": "G",
+"TGG": "W"   ,   "CGG" :"R"  ,    "AGG": "R"  ,    "GGG":"G" ,
+}
+
+
+def translate(DNA): #create function that will take DNA sequence string and give protein sequence
+    protein ="" #variable to hold protein sequence 
+    for seq in range (0,len(DNA),3): 
+        codon = DNA[seq:seq+3] #split DNA into codons
+        if len(codon) == 3:
+            aminoacid= Dict [codon] #grab amino acid for specific codon from dictionary
+            if aminoacid != 'Stop':
+                protein = protein + aminoacid #add to protein sequence
+    return protein 
+    
+def complement(DNA): #given string in the problem 
+    replaceAtoT = DNA.replace("A","t") #replace A with t
+    replaceTtoA = replaceAtoT.replace("T", "a") #replace T with a
+    replaceGtoC = replaceTtoA.replace ("G","c") #replace G with c
+    replaceCtoG = replaceGtoC.replace ("C","g") #replace C with g  
+    newDNA = replaceCtoG.upper()#turn to uppercase 
+    reverse = newDNA [::-1] #give reverse sequence 
+    return reverse 
+    
+def possible_protein_strings(DNA):
+    results = []
+    indices = []
+
+    l = len(DNA)
+    for i in range(l):
+        protein = translate(DNA[i:i+3])
+        if protein and protein == 'M':
+            indices.append(i)
+
+    for i in indices:
+        found_stop = False
+        protein_string = ''
+
+        for j in range(i, l, 3):
+            protein = translate(DNA[j:j+3])
+
+            if not protein:
+                break
+
+            if protein == 'Stop':
+                found_stop = True
+                break
+
+            protein_string += protein
+
+        if found_stop:
+            results.append(protein_string)
+
+    return results
+    results = possible_protein_strings(DNA)
+    
+print results
