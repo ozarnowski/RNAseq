@@ -1,0 +1,1 @@
+Accession	Basic Statistics	Per base sequence quality	Per tile sequence quality	Per sequence quality scores	Per base sequence content	Per base N content	Sequence Length Distribution	Sequence Duplication Levels	Overrepresented sequences	Adapter Content	Kmer ContentERR188182_2	PASS	PASS	FAIL	PASS	FAIL	PASS	PASS	PASS	WARN	PASS	PASS	FAIL
