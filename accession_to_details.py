@@ -1,7 +1,7 @@
 import os
 
-def openFile(accession):
-    os.system("scp /home/wheelerlab2/Data/gEUVADIS_RNASeq/" + accession + ".fastq.gz .")
+def openFile(accession, path):
+    os.system("scp " + path +  accession + ".fastq.gz .")
     os.system("fastqc " + accession + ".fastq.gz")
     os.system("rm " + accession + "_fastqc.html")
     os.system("rm " + accession + ".fastq.gz")
