@@ -8,7 +8,7 @@ def openFile(accession, path):
     os.system("fastqc " + accession + "_flexbar.fastq --limits limits_edited.txt") #run fastqc on it
     #os.system("rm " + accession + "_flexbar_fastqc.html") #remove html
     os.system("rm " + accession + ".fastq") #remove fastq
-    os.system("rm " + accession + "_flexbar.fastq") #remove flexbar output
+    #os.system("rm " + accession + "_flexbar.fastq") #remove flexbar output
     os.system("unzip " + accession + "_flexbar_fastqc.zip") #unzip fastqc output
     os.system("rm " + accession + "_flexbar_fastqc.zip") #remove zipped file
     os.chdir(accession + "_flexbar_fastqc") #go into unzipped folder

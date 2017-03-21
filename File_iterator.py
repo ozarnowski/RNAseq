@@ -13,7 +13,7 @@ def detailMaker():
     
     
 
-    for filename in os.listdir(args.Input_path)[:1]: #take of [:10] to do every file
+    for filename in os.listdir(args.Input_path)[:10]: #take of [:10] to do every file
         if filename.endswith('fastq.gz'):
             temp = filename.replace('.fastq.gz','')
             o.write(openFile(temp, args.Input_path) + '\n')
