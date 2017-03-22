@@ -1,0 +1,12 @@
+Abstract: 
+
+Background: 
+RNA-seq pipelines are necessary to convert sequencing reads to RNA levels for downstream applications. In our program, we make use of FAST-QC for preliminary evaluation and filtering of raw data. We also present a user-friendly program that utilizes simple input parameters and a wrapper code that automates the use of multiple tools. We also present a detailed instruction readme file that will enable a person without specific technical, computer or bioinformatics skills to perform a complete and complex RNA-Seq analysis. Other tools that have been created for this purpose include aRNApipe which uses HPC environments using IBM Platform LSF to conduct a broad range of RNA-seq primary analyses, RAP (RNA-Seq Analysis Pipeline) a cloud computing web application that identifies and quantifies expressed genes and transcripts  and detects alternative splicing events and chimeric transcripts, and  “iMIR” which integrates multiple open source modules/resources and implements statistical approaches, combined in an automated flow for high-throughput smallRNA-Seq data analysis. 
+
+Implementation: 
+FASTQC quality score per read 
+FLEXBAR trim unreliable portions of reads 
+STAR  align reads to a genome 
+RSEQC conduct RNA seq analysis (RPKM)
+RNASEQC conduct RNA seq analysis (RPKM)
+
