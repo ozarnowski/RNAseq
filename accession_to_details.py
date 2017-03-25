@@ -5,9 +5,9 @@ def openFile(accession, path):
     os.system("gunzip " + accession + ".fastq.gz") #unzip it for flexbar
     os.system("flexbar -r " + accession + ".fastq --pre-trim-left 13") #run flexbar on it
     os.system("mv flexbar.fastq " + accession + "_flexbar.fastq") #rename the file
-    os.system("fastqc " + accession + "_flexbar.fastq.gz --limits limits_edited.txt") #run fastqc on it
+    os.system("fastqc " + accession + "_flexbar.fastq --limits /home/ozarnowski/RNAseq/limits_edited.txt") #run fastqc on it
     os.system("rm " + accession + "_flexbar_fastqc.html") #remove html
-    os.system("rm " + accession + ".fastq.gz") #remove fastq
+    os.system("rm " + accession + ".fastq") #remove fastq
     os.system("gzip " + accession + "_flexbar.fastq") #zip flexbar output
     os.system("unzip " + accession + "_flexbar_fastqc.zip") #unzip fastqc output
     os.system("rm " + accession + "_flexbar_fastqc.zip") #remove zipped file
