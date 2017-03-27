@@ -5,7 +5,7 @@ def openFile(accession,accession2,path):
     os.system("scp " + path + accession2 + ".fastq.gz .") 
     os.system("gunzip " + accession + ".fastq.gz") #unzip it for flexbar
     os.system("gunzip " + accession2 + ".fastq.gz")
-    os.system("flexbar -r " + accession + ".fastq -p" + accession2 + ".fastq --pre-trim-left 13") #run flexbar on it
+    os.system("flexbar -r " + accession + ".fastq -p " + accession2 + ".fastq --pre-trim-left 13") #run flexbar on it
     os.system("mv flexbar_1.fastq " + accession + "_flexbar.fastq") #rename the file
     os.system("mv flexbar_2.fastq " + accession2 + "_flexbar.fastq")
     os.system("fastqc " + accession + "_flexbar.fastq") #run fastqc on it

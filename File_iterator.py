@@ -13,7 +13,7 @@ def detailMaker(path):
     files.sort()
     files = [x for x in files if x.endswith("fastq.gz")]
 
-    for i in range(2): #len(files)/2): #take off (2) to do every file
+    for i in range(len(files)/2): 
         o.write(openFile(files[i*2].replace(".fastq.gz",""), files[i*2+1].replace(".fastq.gz",""),path))
                   
     o.close()

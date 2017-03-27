@@ -22,7 +22,7 @@ def parser():
         del temp2[9]
         del temp2[3]    
             
-            if temp1.count("FAIL") == 0 and temp2.count("FAIL") == 0:
-                f.write(temp1[0] + "\n" + temp2[0] + "\n")
+        if temp1.count("FAIL") == 0 and temp2.count("FAIL") == 0:
+            f.write(temp1[0] + "\n" + temp2[0] + "\n")
 
 parser()
