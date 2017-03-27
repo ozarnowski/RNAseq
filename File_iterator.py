@@ -3,21 +3,19 @@ import os
 
 
 def detailMaker(path):
-    os.system("mkdir flexbar_output")
+    if "flexbar_output" not in os.listdir(os.curdir):
+        os.system("mkdir flexbar_output")
     os.chdir("flexbar_output")
     o = open("details.txt", 'w')
     o.write("Accession\tBasic Statistics\tPer base sequence quality\tPer tile sequence quality\tPer sequence quality scores\tPer base sequence content\tPer base N content\tSequence Length Distribution\tSequence Duplication Levels\tOverrepresented sequences\tAdapter Content\tKmer Content\n")
     
-    
+    files = os.listdir(path)
+    files.sort()
+    files = [x for x in files if x.endswith("fastq.gz")]
 
-    for filename in os.listdir(path)[:10]: #take of [:10] to do every file
-        if filename.endswith('fastq.gz'):
-            temp = filename.replace('.fastq.gz','')
-            o.write(openFile(temp, path) + '\n')
-        elif filename.endswith('fastqc.zip'):
-            temp = filename.replace('_fastqc.zip','')
-            o.write(openFile(temp, path) + '\n')
-            
+    for i in range(2): #len(files)/2): #take off (2) to do every file
+        o.write(openFile(files[i*2].replace(".fastq.gz",""), files[i*2+1].replace(".fastq.gz",""),path))
+                  
     o.close()
     os.system("cd ..")
     
