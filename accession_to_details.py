@@ -13,8 +13,8 @@ def openFile(accession,accession2,path):
     os.system("fastqc " + accession2 + "_flexbar.fastq")
     os.system("rm " + accession + "_flexbar_fastqc.html") #remove html
     os.system("rm " + accession2 + "_flexbar_fastqc.html")
-    os.system("rm " + accession + ".fastq") #remove fastq
-    os.system("rm " + accession2 + ".fastq")
+    os.system("rm " + accession + ".fastq.gz") #remove fastq
+    os.system("rm " + accession2 + ".fastq.gz")
     os.system("gzip " + accession + "_flexbar.fastq") #zip flexbar output
     os.system("gzip " + accession2 + "_flexbar.fastq")
     os.system("unzip " + accession + "_flexbar_fastqc.zip") #unzip fastqc output
