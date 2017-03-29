@@ -3,18 +3,17 @@ import os
 def openFile(accession,accession2,path):
     os.system("scp " + path + accession + ".fastq.gz .") #get the file from the path to work with
     os.system("scp " + path + accession2 + ".fastq.gz .") 
-    #os.system("gunzip " + accession + ".fastq.gz") #unzip it for flexbar
-    #os.system("gunzip " + accession2 + ".fastq.gz")
-    os.system("flexbar -r " + accession + ".fastq.gz -p " + accession2 + ".fastq.gz --pre-trim-left 13") #run flexbar on it
-    os.system("mv flexbarOut_1.fastq " + accession + "_flexbar.fastq") #rename the file
-    os.system("mv flexbarOut_2.fastq " + accession2 + "_flexbar.fastq")
-    os.system("rm flexbarOut.log") #remove the .log file
+    os.system("gunzip " + accession + ".fastq.gz") #unzip it for flexbar
+    os.system("gunzip " + accession2 + ".fastq.gz")
+    os.system("flexbar -r " + accession + ".fastq -p " + accession2 + ".fastq --pre-trim-left 13") #run flexbar on it
+    os.system("mv flexbar_1.fastq " + accession + "_flexbar.fastq") #rename the file
+    os.system("mv flexbar_2.fastq " + accession2 + "_flexbar.fastq")
     os.system("fastqc " + accession + "_flexbar.fastq") #run fastqc on it
     os.system("fastqc " + accession2 + "_flexbar.fastq")
     os.system("rm " + accession + "_flexbar_fastqc.html") #remove html
     os.system("rm " + accession2 + "_flexbar_fastqc.html")
-    os.system("rm " + accession + ".fastq.gz") #remove fastq
-    os.system("rm " + accession2 + ".fastq.gz")
+    os.system("rm " + accession + ".fastq") #remove fastq
+    os.system("rm " + accession2 + ".fastq")
     os.system("gzip " + accession + "_flexbar.fastq") #zip flexbar output
     os.system("gzip " + accession2 + "_flexbar.fastq")
     os.system("unzip " + accession + "_flexbar_fastqc.zip") #unzip fastqc output
