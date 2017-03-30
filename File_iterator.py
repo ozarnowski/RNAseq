@@ -3,9 +3,9 @@ import os
 
 
 def detailMaker(path):
-    if "flexbar_output" not in os.listdir(os.curdir):
-        os.system("mkdir flexbar_output")
-    os.chdir("flexbar_output")
+    if "cutadapt_output" not in os.listdir(os.curdir):
+        os.system("mkdir cutadapt_output")
+    os.chdir("cutadapt_output")
     o = open("details.txt", 'w')
     o.write("Accession\tBasic Statistics\tPer base sequence quality\tPer tile sequence quality\tPer sequence quality scores\tPer base sequence content\tPer base N content\tSequence Length Distribution\tSequence Duplication Levels\tOverrepresented sequences\tAdapter Content\tKmer Content\n")
     
