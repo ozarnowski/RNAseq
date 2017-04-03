@@ -42,6 +42,7 @@ def runSTAR(fastqList):
     os.system("rm Log.out")
     os.system("rm -r _STARtmp")
     os.system("rm Log.final.out")
+
 def main():
     parser()
     f = open("final_cut.txt",'r')
