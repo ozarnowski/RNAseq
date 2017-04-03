@@ -1,15 +1,16 @@
-# RNAseq
+# RNAseqPipeline
+RNAseqPipeline is a command line tool that serves as a pipeline which processes RNA sequences via the use of various applications including quality control metrics.
 
-Categories for details.txt:
-Accession
-Basic Statistics
-Per base sequence quality
-Per tile sequence quality
-Per sequence quality scores
-Per base sequence content
-PEr base N content
-Sequence Length Distribution
-Sequence Duplication Levels
-Overrepresented sequences
-Adapter Content
-Kmer Content
+## Software Requirements: 
+Linux or MAC OS
+Python 2.7 
+
+## Scripts
++ details_parse.py
++ File_iterator.py
++ accession_to_details.py
+
+## Usage 
+
+`python /path/to/details_parse.py path/to/FASTQ/directory`
+
