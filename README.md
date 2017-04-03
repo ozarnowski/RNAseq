@@ -11,6 +11,7 @@ Python 2.7
 + accession_to_details.py
 
 ## Usage 
-
 `python /path/to/details_parse.py path/to/FASTQ/directory`
 
+# To run in background:
+`nohup python /path/to/details_parse.py path/to/FASTQ/directory &`
