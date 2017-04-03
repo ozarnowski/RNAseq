@@ -24,5 +24,29 @@ def parser():
             
         if temp1.count("FAIL") == 0 and temp2.count("FAIL") == 0:
             f.write(temp1[0] + "\n" + temp2[0] + "\n")
+    f.close()
 
-parser()
+def runSTAR(fastqList):
+    fastqList = map(str.strip, fastqList)
+    for i in range((len(fastqList)/2)):
+        os.system("STAR --runThreadN 6 --genomeDir /home/azakkar/GRCh38/star_indices --readFilesIn "
+        + fastqList[i*2] + "_cutadapt.fastq.gz " + fastqList[i*2+1] + "_cutadapt.fastq.gz --readFilesCommand"
+        + " zcat --outSAMtype BAM SortedByCoordinate --limitBAMsortRAM 10000000000 --genomeLoad LoadAndKeep")
+        os.system("rm Log.progress.out")
+        os.system("rm Log.out")
+        os.system("rm SJ.out.tab")
+        os.system("mv Aligned.sortedByCoord.out.bam " + fastqList[i*2][:-2] + ".bam")
+    os.system("STAR --runThreadN 6 --genomeDir /home/azakkar/GRCh38/star_indices --genomeLoad Remove")
+    os.system("rm Aligned.out.sam")
+    os.system("rm Log.progress.out")
+    os.system("rm Log.out")
+    os.system("rm -r _STARtmp")
+    os.system("rm Log.final.out")
+def main():
+    parser()
+    f = open("final_cut.txt",'r')
+    f = f.readlines()
+    runSTAR(f)
+
+
+main()
