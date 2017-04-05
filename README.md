@@ -25,4 +25,4 @@ Python 2.7
   + https://github.com/ozarnowski/RNAseq/tree/master/sample_files
 
 + The genome index can be constructed using STAR, however, the path to a pipeline-ready index is as follows:
-  + /home/azakkar/GRCh38/star_indices
+  + /home/azakkar/GRCh38/star_indices/
