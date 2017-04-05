@@ -4,6 +4,7 @@ import os
 
 parser = argparse.ArgumentParser()
 parser.add_argument("Input_path", help = "path to directory of input files")
+parser.add_argument("Genome_path", help = "path to genome directory")
 args = parser.parse_args()
 
 detailMaker(args.Input_path)
@@ -29,7 +30,7 @@ def parser():
 def runSTAR(fastqList):
     fastqList = map(str.strip, fastqList)
     for i in range((len(fastqList)/2)):
-        os.system("STAR --runThreadN 6 --genomeDir /home/azakkar/GRCh38/star_indices --readFilesIn "
+        os.system("STAR --runThreadN 6 --genomeDir " + args.Genome_path + " --readFilesIn "
         + fastqList[i*2] + "_cutadapt.fastq.gz " + fastqList[i*2+1] + "_cutadapt.fastq.gz --readFilesCommand"
         + " zcat --outSAMtype BAM SortedByCoordinate --limitBAMsortRAM 10000000000 --genomeLoad LoadAndKeep")
         os.system("rm Log.progress.out")
