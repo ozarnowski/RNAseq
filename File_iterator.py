@@ -7,7 +7,7 @@ def detailMaker(path):
         os.system("mkdir cutadapt_output")
     os.chdir("cutadapt_output")
     o = open("details.txt", 'w')
-    o.write("Accession\tBasic Statistics\tPer base sequence quality\tPer tile sequence quality\tPer sequence quality scores\tPer base sequence content\tPer base N content\tSequence Length Distribution\tSequence Duplication Levels\tOverrepresented sequences\tAdapter Content\tKmer Content\n")
+    o.write("Accession    Basic Statistics    Per base sequence quality    Per sequence quality scores    Per base sequence content    Per sequence GC content    Per base N content    Sequence Length Distribution    Overrepresented sequences    Adapter Content\n")
     
     files = os.listdir(path)
     files.sort()

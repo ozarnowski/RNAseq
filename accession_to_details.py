@@ -27,4 +27,11 @@ def getSummary(accession):
     output = accession
     for line in s:
         output += '\t' + line.split("\t")[0]#create output from summary text
-    return output + '\n'
+    listy = output.split('\t')
+    del listy[-1]
+    del listy[9]
+    del listy[3]
+    newout = ''
+    for x in listy:
+        newout += x + '\t'    
+    return newout + '\n'
