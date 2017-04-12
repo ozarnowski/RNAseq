@@ -34,11 +34,15 @@ def runSTAR(fastqList):
     for i in range((len(fastqList)/2)):
         os.system("STAR --runThreadN 6 --genomeDir " + args.Genome_path + " --readFilesIn "
         + fastqList[i*2] + "_cutadapt.fastq.gz " + fastqList[i*2+1] + "_cutadapt.fastq.gz --readFilesCommand"
-        + " zcat --outSAMtype BAM SortedByCoordinate")
+        + " zcat --outSAMtype BAM Unsorted")
         os.system("rm Log.progress.out")
         os.system("rm Log.out")
         os.system("rm SJ.out.tab")
-        os.system("mv Aligned.sortedByCoord.out.bam " + fastqList[i*2][:-2] + ".bam")
+        os.system("mv Aligned.out.bam " + fastqList[i*2][:-2] + ".bam")
+        print ("Samtools is sorting " + fastqList[i*2][:-2] + " ...")
+        os.system("samtools sort " + fastqList[i*2][:-2] + ".bam -o " + fastqList[i*2][:-2] + ".sorted.bam")
+        os.system("rm " + fastqList[i*2][:-2] + ".bam") 
+
     os.system("rm Log.final.out")
 
 def main():
