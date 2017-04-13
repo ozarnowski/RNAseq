@@ -41,7 +41,9 @@ def runSTAR(fastqList):
         os.system("mv Aligned.out.bam " + fastqList[i*2][:-2] + ".bam")
         print ("Samtools is sorting " + fastqList[i*2][:-2] + " ...")
         os.system("samtools sort " + fastqList[i*2][:-2] + ".bam -o " + fastqList[i*2][:-2] + ".sorted.bam")
-        #os.system("rm " + fastqList[i*2][:-2] + ".bam") 
+        print ("Samtools is indexing " + fastqList[i*2][:2] + " ...")
+        os.system("samtools index " + fastqList[i*2][:-2] + ".sorted.bam " + fastqList[i*2][:-2] + ".sorted.bam.bai")
+        os.system("rm " + fastqList[i*2][:-2] + ".bam") 
 
     os.system("rm Log.final.out")
 
