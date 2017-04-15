@@ -3,9 +3,9 @@ import os
 
 
 def detailMaker(path):
-    if "cutadapt_output" not in os.listdir(os.curdir):
-        os.system("mkdir cutadapt_output")
-    os.chdir("cutadapt_output")
+    if "RNAseq_pipeline_output" not in os.listdir(os.curdir):
+        os.system("mkdir RNAseq_pipeline_output")
+    os.chdir("RNAseq_pipeline_output")
     o = open("details.txt", 'w')
     o.write("Accession    Basic Statistics    Per base sequence quality    Per sequence quality scores    Per base sequence content    Per sequence GC content    Per base N content    Sequence Length Distribution    Overrepresented sequences    Adapter Content\n")
     

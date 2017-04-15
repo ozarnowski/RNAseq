@@ -29,9 +29,9 @@ def parser():
             p.write(temp1x + "\n" + temp2x + "\n")
     f.close()
 
-def runSTAR(fastqList):
+def runAnalysis(fastqList):
     fastqList = map(str.strip, fastqList)
-    for i in range((len(fastqList)/2)):
+    for i in range(len(fastqList)/2):
         os.system("STAR --runThreadN 6 --genomeDir " + args.Genome_path + " --readFilesIn "
         + fastqList[i*2] + "_cutadapt.fastq.gz " + fastqList[i*2+1] + "_cutadapt.fastq.gz --readFilesCommand"
         + " zcat --outSAMtype BAM Unsorted")
@@ -48,11 +48,40 @@ def runSTAR(fastqList):
         os.system("python /usr/local/bin/anaconda2/bin/FPKM_count.py -i" + fastqList[i*2][:-2] + ".sorted.bam -o " + fastqList[i*2][:-2] + " -r /home/azakkar/GRCh38/annotation/gencode.v24.annotation.nochr.bed")
     os.system("rm Log.final.out")
 
+def geneExpressionData(fastqList):
+    fastqList = map(str.strip, fastqList)
+    for i in range(len(fastqList)/2):
+        os.system("python /usr/local/bin/anaconda2/bin/RPKM_saturation.py -i bam_files/" + fastqList[i*2][:-2] + ".sorted.bam -o " + fastqList[i*2][:-2] + " -r /home/azakkar/GRCh38/annotation/gencode.v24.annotation.nochr.bed")
+        os.system("python /usr/local/bin/anaconda2/bin/junction_saturation.py -i bam_files/" + fastqList[i*2][:-2] + ".sorted.bam -o " + fastqList[i*2][:-2] + " -r /home/azakkar/GRCh38/annotation/gencode.v24.annotation.nochr.bed")
+        os.system("python /usr/local/bin/anaconda2/bin/read_distribution.py -i bam_files/" + fastqList[i*2][:-2] + ".sorted.bam -r /home/azakkar/GRCh38/annotation/gencode.v24.annotation.nochr.bed > " + fastqList[i*2][:-2] + ".read_distribution")
+        os.system("python /usr/local/bin/anaconda2/bin/infer_experiment.py -i bam_files/" + fastqList[i*2][:-2] + ".sorted.bam -r /home/azakkar/GRCh38/annotation/gencode.v24.annotation.nochr.bed > " + fastqList[i*2][:-2] + ".infer_experiment")
+        os.system("python /usr/local/bin/anaconda2/bin/junction_annotation.py -i bam_files/" + fastqList[i*2][:-2] + ".sorted.bam -o " + fastqList[i*2][:-2] + " -r /home/azakkar/GRCh38/annotation/gencode.v24.annotation.nochr.bed")
+    os.system("python /usr/local/bin/anaconda2/bin/geneBody_coverage.py -i bam_files/ -o all -r /home/azakkar/GRCh38/annotation/gencode.v24.annotation.nochr.bed")
+
 def main():
     parser()
     f = open("final_cut.txt",'r')
     f = f.readlines()
-    runSTAR(f)
+    if "fastq_files" not in os.listdir(os.curdir):
+        os.system("mkdir fastq_files")
+    if "bam_files" not in os.listdir(os.curdir):
+        os.system("mkdir bam_files")
+    if "gene_expression_files" not in os.listdir(os.curdir):
+        os.system("mkdir gene_expression_files")
+    runAnalysis(f)
+    os.system("mv *.sorted.* bam_files/")
+    os.system("mv *.FPKM.xls gene_expression_files/")
+    os.system("mv *.fastq.gz fastq_files/")
+    geneExpressionData(f)
+    os.system("mv *.eRPKM.xls gene_expression_files/")
+    os.system("mv *.junctionSaturation_plot.* gene_expression_files/")
+    os.system("mv *.rawCount.xls gene_expression_files/")
+    os.system("mv *.saturation.* gene_expression_files/")
+    os.system("mv all.geneBodyCoverage.* gene_expression_files/")
+    os.system("mv *.read_distribution gene_expression_files/")
+    os.system("mv *.infer_experiment gene_expression_files/")
+    os.system("mv *.junction* gene_expression_files/")
+    os.system("mv *.splice* gene_expression_files/")
     os.system("rm final_cut.txt")
 
 main()
