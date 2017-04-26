@@ -83,7 +83,6 @@ def main():
     os.system("mv *.junction* gene_expression_files/")
     os.system("mv *.splice* gene_expression_files/")
     os.system("rm final_cut.txt")
-    os.system("mv *.infer_experiment.txt gene_expression_files/")
     os.system("rm log.txt")
     os.system("rm details.txt")
 
