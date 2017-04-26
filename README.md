@@ -5,18 +5,18 @@
 RNAseqPipeline is a command line tool that serves as a pipeline which processes RNA sequences via the use of various applications including quality control metrics.
 
 ## Software Requirements: 
-Linux
-Python 2.7.13
-Java
-R
++ Linux
++ Python 2.7.13
++ Java
++ R
 
 ### All of the following programs must be installed and in your PATH:
-Cutadapt 1.13
-FastQC 0.11.5
-STAR 2.5
-Samtools 1.3.1
-RseqC 1.1.8
-And all their dependencies.
++ Cutadapt 1.13
++ FastQC 0.11.5
++ STAR 2.5
++ Samtools 1.3.1
++ RseqC 1.1.8
++ And all their dependencies.
 
 ## Scripts
 + details_parse.py
@@ -94,8 +94,8 @@ And all their dependencies.
 
 Don't. It's already built at /home/azakkar/GRCh38 (can be used as input as path to genome directory. Check usage).
 
-+ * fasta files can be found at ftp.ensembl.org/pub/release-88/fasta/ ; only download dna.chromosome.n.fa.gz files.
-+ * * corresponding bed and gtf files can be found at genome.ucsc.edu/cgi-bin/hgTables?command=start
++ `*` fasta files can be found at ftp.ensembl.org/pub/release-88/fasta/ ; only download dna.chromosome.n.fa.gz files.
++ `* *` corresponding bed and gtf files can be found at genome.ucsc.edu/cgi-bin/hgTables?command=start
 
 # Usage 
 
