@@ -1,4 +1,7 @@
-# RNAseqPipeline [PUT OUR LOGO]
+# RSePi
+
+![alt text](https://github.com/ozarnowski/RNAseq/blob/master/RSePi_logo.png "Logo Title Text 1")
+### An RNAseq Pipeline
 
 # Overview
 
