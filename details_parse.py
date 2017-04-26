@@ -32,7 +32,7 @@ def parser():
 def runAnalysis(fastqList):
     fastqList = map(str.strip, fastqList)
     for i in range(len(fastqList)/2):
-        os.system("STAR --runThreadN 6 --genomeDir " + args.Genome_path + " --readFilesIn "
+        os.system("STAR --runThreadN 6 --genomeDir " + args.Genome_path + "/star_indices --readFilesIn "
         + fastqList[i*2] + "_cutadapt.fastq.gz " + fastqList[i*2+1] + "_cutadapt.fastq.gz --readFilesCommand"
         + " zcat --outSAMtype BAM Unsorted")
         os.system("rm Log.progress.out")
@@ -45,18 +45,18 @@ def runAnalysis(fastqList):
         os.system("samtools index " + fastqList[i*2][:-2] + ".sorted.bam " + fastqList[i*2][:-2] + ".sorted.bam.bai")
         os.system("rm " + fastqList[i*2][:-2] + ".bam")
         print ("Calculating FPKM values for "  + fastqList[i*2][:-2] + " ...")
-        os.system("python /usr/local/bin/anaconda2/bin/FPKM_count.py -i" + fastqList[i*2][:-2] + ".sorted.bam -o " + fastqList[i*2][:-2] + " -r /home/azakkar/GRCh38/annotation/gencode.v24.annotation.nochr.bed")
+        os.system("python /usr/local/bin/anaconda2/bin/FPKM_count.py -i" + fastqList[i*2][:-2] + ".sorted.bam -o " + fastqList[i*2][:-2] + " -r " + args.Genome_path + "/annotation/gencode.v24.annotation.nochr.bed")
     os.system("rm Log.final.out")
 
 def geneExpressionData(fastqList):
     fastqList = map(str.strip, fastqList)
     for i in range(len(fastqList)/2):
-        os.system("python /usr/local/bin/anaconda2/bin/RPKM_saturation.py -i bam_files/" + fastqList[i*2][:-2] + ".sorted.bam -o " + fastqList[i*2][:-2] + " -r /home/azakkar/GRCh38/annotation/gencode.v24.annotation.nochr.bed")
-        os.system("python /usr/local/bin/anaconda2/bin/junction_saturation.py -i bam_files/" + fastqList[i*2][:-2] + ".sorted.bam -o " + fastqList[i*2][:-2] + " -r /home/azakkar/GRCh38/annotation/gencode.v24.annotation.nochr.bed")
-        os.system("python /usr/local/bin/anaconda2/bin/read_distribution.py -i bam_files/" + fastqList[i*2][:-2] + ".sorted.bam -r /home/azakkar/GRCh38/annotation/gencode.v24.annotation.nochr.bed > " + fastqList[i*2][:-2] + ".read_distribution")
-        os.system("python /usr/local/bin/anaconda2/bin/infer_experiment.py -i bam_files/" + fastqList[i*2][:-2] + ".sorted.bam -r /home/azakkar/GRCh38/annotation/gencode.v24.annotation.nochr.bed > " + fastqList[i*2][:-2] + ".infer_experiment")
-        os.system("python /usr/local/bin/anaconda2/bin/junction_annotation.py -i bam_files/" + fastqList[i*2][:-2] + ".sorted.bam -o " + fastqList[i*2][:-2] + " -r /home/azakkar/GRCh38/annotation/gencode.v24.annotation.nochr.bed")
-    os.system("python /usr/local/bin/anaconda2/bin/geneBody_coverage.py -i bam_files/ -o all -r /home/azakkar/GRCh38/annotation/gencode.v24.annotation.nochr.bed")
+        os.system("python /usr/local/bin/anaconda2/bin/RPKM_saturation.py -i bam_files/" + fastqList[i*2][:-2] + ".sorted.bam -o " + fastqList[i*2][:-2] + " -r " + args.Genome_path + "/annotation/gencode.v24.annotation.nochr.bed")
+        os.system("python /usr/local/bin/anaconda2/bin/junction_saturation.py -i bam_files/" + fastqList[i*2][:-2] + ".sorted.bam -o " + fastqList[i*2][:-2] + " -r " + args.Genome_path + "/annotation/gencode.v24.annotation.nochr.bed")
+        os.system("python /usr/local/bin/anaconda2/bin/read_distribution.py -i bam_files/" + fastqList[i*2][:-2] + ".sorted.bam -r " + args.Genome_path + "/annotation/gencode.v24.annotation.nochr.bed > " + fastqList[i*2][:-2] + ".read_distribution")
+        os.system("python /usr/local/bin/anaconda2/bin/infer_experiment.py -i bam_files/" + fastqList[i*2][:-2] + ".sorted.bam -r " + args.Genome_path + "/annotation/gencode.v24.annotation.nochr.bed > " + fastqList[i*2][:-2] + ".infer_experiment")
+        os.system("python /usr/local/bin/anaconda2/bin/junction_annotation.py -i bam_files/" + fastqList[i*2][:-2] + ".sorted.bam -o " + fastqList[i*2][:-2] + " -r " + args.Genome_path + "/annotation/gencode.v24.annotation.nochr.bed")
+    os.system("python /usr/local/bin/anaconda2/bin/geneBody_coverage.py -i bam_files/ -o all -r " + args.Genome_path + "/annotation/gencode.v24.annotation.nochr.bed")
 
 def main():
     parser()
