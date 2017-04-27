@@ -1,6 +1,4 @@
-# RSePi
-
-        ![alt text](https://github.com/ozarnowski/RNAseq/blob/master/RSePi_logo_final.png "RSePi")
+![alt text](https://github.com/ozarnowski/RNAseq/blob/master/RSePi_logo_final.png "RSePi")
 
 # Overview
 
