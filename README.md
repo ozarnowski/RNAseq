@@ -1,7 +1,6 @@
 # RSePi
 
-![alt text](https://github.com/ozarnowski/RNAseq/blob/master/RSePi_logo.png "Logo Title Text 1")
-### An RNAseq Pipeline
+        ![alt text](https://github.com/ozarnowski/RNAseq/blob/master/RSePi_logo_final.png "RSePi")
 
 # Overview
 
@@ -93,12 +92,12 @@ RNAseqPipeline is a command line tool that serves as a pipeline which processes 
 
 `STAR --runThreadN 4 --runMode genomeGenerate --genomeDir genomeName/star_indices_overhang100/ --genomeFastaFiles GRCh38/sequence/genomeName.all.fa --sjdbGTFfile genomeName/annotation/filename.gtf --sjdbOverhang 100`
 
++ `*` fasta files can be found at ftp.ensembl.org/pub/release-88/fasta/ ; only download dna.chromosome.n.fa.gz files.
++ `* *` corresponding bed and gtf files can be found at genome.ucsc.edu/cgi-bin/hgTables?command=start
+
 ### How to build [if on Wheelerlab2 and you want to use the human genome build 38]:
 
 Don't. It's already built at /home/azakkar/GRCh38 (can be used as input as path to genome directory. Check usage).
-
-+ `*` fasta files can be found at ftp.ensembl.org/pub/release-88/fasta/ ; only download dna.chromosome.n.fa.gz files.
-+ `* *` corresponding bed and gtf files can be found at genome.ucsc.edu/cgi-bin/hgTables?command=start
 
 # Usage 
 
