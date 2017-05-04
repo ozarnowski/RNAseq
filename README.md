@@ -31,6 +31,7 @@ RNAseqPipeline is a command line tool that serves as a pipeline which processes 
   + Sort BAM files with Samtools.
   + Calculate FPKM values with RSeQC.
   + Obtains the following information from each file using RSeQC:
+    + FPKM counts
     + RPKM saturation
     + Junction saturation
     + Read distribution
@@ -110,11 +111,14 @@ Don't. It's already built at /home/azakkar/GRCh38 (can be used as input as path 
 
 # Usage 
 
-`python /path/to/details_parse.py path/to/FASTQ/directory/ /path/to/genomeDir`
+`python /path/to/details_parse.py -i path/to/FASTQ/directory/ -g /path/to/genomeDir`
 
++ Optional Input (-c)
+  + add `-c True` to run geneBody_coverage.py (default = False)
+  
 ### To run in background:
 
-`nohup python /path/to/details_parse.py path/to/FASTQ/directory/ /path/to/genomeDir&`
+`nohup python /path/to/details_parse.py -i path/to/FASTQ/directory/ -g /path/to/genomeDir&`
 
 + A sample fastq folder with three paired fastq files is available at:
   + https://github.com/ozarnowski/RNAseq/tree/master/sample_files
@@ -128,10 +132,12 @@ Don't. It's already built at /home/azakkar/GRCh38 (can be used as input as path 
 + below_threshold.txt contains information on files deemed to have poor quality.
 + fastq_files contains the trimmed fastq files from the input directory.
 + bam_files contains the alignment data for every fastq file based on the desired genome.
-+ gene_expression_files contains FPKM tables for every input file, including outputs from:
++ gene_expression_files contains outputs of:
+  + FPKM counts
   + RPKM saturation
   + Junction saturation
   + Read distribution
   + Infer experiment
   + Junction annotation
+  + Gene body coverage
 
