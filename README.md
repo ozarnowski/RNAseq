@@ -15,16 +15,28 @@ RNAseqPipeline is a command line tool that serves as a pipeline which processes 
 + FastQC 0.11.5
 + STAR 2.5
 + Samtools 1.3.1
-+ RseqC 1.1.8
++ RSeQC 1.1.8
 + And all their dependencies.
 
 ## Scripts
-+ details_parse.py
-  + [info on details_parse.py]
-+ File_iterator.py
-  + [info on File_iterator.py]
 + accession_to_details.py
-  + [info on accession_to_details.py]
+  + Runs cutadapt on a pair of files: trims first 13 bases.
+  + Runs FastQC on the pair, and obtain summary consisting of PASS/WARN/FAIL values for different parameters for each fastq file.
+  + This summary will be compiled into a table.
++ File_iterator.py
+  + Compiles the summary data generated in accession_to_details.py.
++ details_parse.py
+  + First uses File_iterator.py to trim sequences and to generate a summary table.
+  + Makes a list of the input files that do not meet the quality threshold.
+  + Run STAR, which aligns the fastq reads to a genome to generate BAM files.
+  + Sort BAM files with Samtools.
+  + Calculate FPKM values with RSeQC.
+  + Obtains the following information from each file using RSeQC:
+    + RPKM saturation
+    + Junction saturation
+    + Read distribution
+    + Infer experiment
+    + Junction annotation
 
 # Input data
 
@@ -113,5 +125,14 @@ Don't. It's already built at /home/azakkar/GRCh38 (can be used as input as path 
   
 ## Output files
 
-+ All output files contained in RNAseq_pipeline_output
-+ 
++ All output files contained in RNAseq_pipeline_output.
++ below_threshold.txt contains information on files deemed to have poor quality.
++ fastq_files contains the trimmed fastq files from the input directory.
++ bam_files contains the alignment data for every fastq file based on the desired genome.
++ gene_expression_files contains FPKM tables for every input file, including outputs from:
+  + RPKM saturation
+  + Junction saturation
+  + Read distribution
+  + Infer experiment
+  + Junction annotation
+
