@@ -7,7 +7,6 @@ RNAseqPipeline is a command line tool that serves as a pipeline which processes 
 ## Software Requirements: 
 + Linux
 + Python 2.7.13
-+ Java
 + R
 
 ### All of the following programs must be installed and in your PATH:
