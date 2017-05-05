@@ -1,0 +1,53 @@
+RNA-seq Pipeline:
+
+Abstract: 
+With the rapid increase in the need for analyzing RNA sequences, and the huge volume of data generated from Next Generation Sequencing, it is necessary to build a pipeline that allows us to take advantage of computational resources and conduct RNA-seq data processing in a reliable, flexible and fully automated manner. We present RNA-seq Pipeline, a powerful project oriented tool that processes RNA sequences via the use of various applications including quality control metrics. Thus, RNA-seq Pipeline is an automated modular analysis pipeline that integrates state-of-the-art bioinformatics tools. RNA-seq Pipeline is a user-friendly pipeline that can be suitably customized by biologists with few or limited skills in computer science or Bioinformatics. This new pipeline will allow us to efficiently analyze and store sequence data and results. RNA-seq Pipeline works on Linux and Mac operating systems.
+
+Background: 
+	In the past few decades, there has been a rapid surge in the use of Next Generation Sequencing techniques, which have also become increasingly accessible to researchers. As a result, RNA sequencing pipelines are now more needed than ever to convert sequencing reads to RNA levels for downstream applications. In our program, we make use of FastQC for preliminary evaluation and filtering of raw data. We also present a user-friendly program that utilizes simple input parameters and a wrapper code that automates the use of multiple tools. Furthermore, we also present a detailed instruction readme file that will enable a person without specific technical, computer or bioinformatics skills to perform a complete and complex RNA-Seq analysis. To our knowledge, several pipeline tools have been implemented for RNA-seq data analysis. Some of these other tools include aRNApipe (Arnald et al 2016) which uses HPC environments using IBM Platform LSF to conduct a broad range of RNA-seq primary analyses, RAP (D’Antonio et al 2013) (RNA-Seq Analysis Pipeline) a cloud computing web application that identifies and quantifies expressed genes and transcripts  and detects alternative splicing events and chimeric transcripts, and  “iMIR” (Guirato et al 2013) which integrates multiple open source modules/resources and implements statistical approaches, combined in an automated flow for high-throughput smallRNA-Seq data analysis. Our project, in addition to being more user friendly does not require an HPC (High Performance Computing) environment nor a complex web interface. This fully automated analysis workflow is put forth to analyze sequencing data in several steps, each one addressing a particular task. 
+
+Implementation: 
+ 
+		
+
+The RNA-seq Pipeline takes FastQ files as input.  These Fastq files contain DNA sequences as reads from high-throughput DNA sequencing machines. The original biological samples contain mRNA in order to analyze gene expression, and this mRNA is reverse transcribed to cDNA in order for them to be analyzed by the high throughput sequencers. The sequencing machines also report quality scores for each base, which are also included in the FastQ file. 
+These FastQ files are then analyzed for quality in order for them to be used in further analysis. Often times, the first thirteen bases of high throughput sequencing reads have poor quality, so they are trimmed using Cutadapt (Martin 2011). Then, the trimmed sequences are analyzed for various factors including [something and something else] using FastQC (Andrew 2011) in order to ensure overall quality. If the FastQ files contain paired-end sequence data, then an entire pair will be excluded from further analysis if only one member of a pair is low quality.
+At this point, the pipeline has designated trimmed, high-quality FastQ files for use in further analysis. The next step is to align the sequences to a genome in order to calculate expression levels at various locations along the genome. One must use genome that matches by species to the FastQ files. The alignment can be done with the STAR alignment tool, (Dobin et al 2013) which generates compressed versions of SAM (Sequence Alignment Map) format, called BAM files. These BAM files need to be sorted by genome location, or chromosome coordinate in order to be used in further analysis. The sorting is carried out using the Samtools software (Li et al 2009). 
+Finally, the sorted BAM files can be used to generate FPKM files, which contain data on the frequency of gene expression per gene, and normalizes the expression count by gene size and read count, giving a final FPKM (fragments per kilobase per million reads) value for every gene. This allows for comparisons of gene expression levels between two samples on level grounds. The FPKM value generation can be done with either RNA-SeQC (DeLuca et al 2012) or RseqC (Wang et al 2012). When compared, the FPKM values given by both RNA-SeQC and RseqC are [similar/different + more info]. One can conduct further analysis of the BAM alignment files with RseqC with the following tools:
+•	Gene Body Coverage: to calculate RNA seq reads coverage over gene body. 
+•	Junction Saturation: checks for saturation, then detects splice junctions and compares them to the reference gene model.
+•	RPKM Saturation: calculates RPKM values in order to figure out whether or not the current sequencing depth is saturated.
+•	Read Distribution:  to calculate how mapped reads are distributed over genome feature 
+•	Infer Experiment: compares the “strandness of reads” with the “strandness of transcripts” to figure out how reads were stranded for strand-specific RNA seq data. 
+•	Junction annotation:  compares detected splice junctions to reference genome model 
+
+Results: 
+•	Size of input files
+•	Time taken for full analysis
+•	Number of cores, RAM, etc.
+•	Similarities between RseqC and RNA-SeQC
+•	Anything we can learn from the 6 tools from RseqC
+•	What we managed to simplify it into: the number of inputs, how much it does for you:
+o	Does it build the genome index for you?
+o	How many optional inputs can we incorporate?
+o	How will we grab the gtf file that corresponds with the genome that the user downloaded? Will the user just do that all on his/her own before that?
+•	Everything should be incorporated into the README, proof that it is user-friendly would be nice.
+
+References: 
+Arnald Alonso, Brittany N. Lasseigne, Kelly Williams, Josh Nielsen, Ryne C. Ramaker,Andrew A Hardigan, Bobbi Johnston, Brian S. Roberts, Sara J. Cooper, Sara Marsal,Richard M. Myers 2016 “aRNApipe: A balanced, efficient and distributed pipeline for processing RNA-seq data in high performance computing environments” bioRxiv 060277; doi: https://doi.org/10.1101/060277
+Andrew S (2010) “FastQC: a quality control tool for high throughput sequence data.” http://www.bioinformatics.bbsrc.ac.uk/projects/fastqc/
+D’Antonio M, D’Onorio De Meo P, Pallocca M, et al. “RAP: RNA-Seq Analysis Pipeline, a new cloud-based NGS web application.” BMC Genomics. 2015;16(Suppl 6):S3. doi:10.1186/1471-2164-16-S6-S3.
+DeLuca D. S. et al. . “RNA-SeQC: RNA-seq metrics for quality control and process optimization.” Bioinformatics (Oxford, England) 28, 1530–1532, doi: 10.1093/bioinformatics/bts196 (2012)
+Dobin A, Davis CA, Schlesinger F, et al. “STAR: ultrafast universal RNA-seq aligner.” Bioinformatics. 2013;29(1):15-21. doi:10.1093/bioinformatics/bts635.
+
+Giurato, Giorgio, Maria De Filippo, Antonio Rinaldi, Adnan Hashim, Giovanni Nassa, Maria Ravo, Francesca Rizzo, Roberta Tarallo, and Alessandro Weisz. "IMir: An Integrated Pipeline for High-throughput Analysis of Small Non-coding RNA Data Obtained by SmallRNA-Seq." BMC Bioinformatics 14.1 (2013): 362. Web
+
+Li H. et al. . “The sequence alignment/map format and SAMtools.” Bioinformatics 25, 2078–2079 (2009). 
+
+Martin, Marcel. "Cutadapt Removes Adapter Sequences from High-throughput Sequencing Reads." EMBnet.journal 17.1 (2011) 
+
+Wang L, Wang S, Li W. “RSeQC: quality control of RNA-seq experiments.” Bioinformatics. 2012;28(16):2184–5. doi: 10.1093/bioinformatics/bts356
+
+
+
+
