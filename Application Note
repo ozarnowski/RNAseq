@@ -1,0 +1,21 @@
+
+Abstract: 
+With the rapid increase in the need for analyzing RNA sequences, and the huge volume of data generated from Next Generation Sequencing, it is necessary to build a pipeline that allows us to take advantage of computational resources and conduct RNA-seq data processing in a reliable, flexible and fully automated manner. We present RNASEQ Pipeline, a powerful project oriented tool that processes RNA sequences via the use of various applications including quality control metrics. Thus, RNASEQ Pipeline is an automated modular analysis pipeline that integrates state-of-the-art bioinformatics tools. RNASEQ Pipeline is a user-friendly pipeline that can be suitably customized by biologists with few or limited skills in computer science or Bioinformatics. This new pipeline will allow us to efficiently analyze and store sequence data and results. RNASEQ Pipeline works on Linux and Mac operating systems.
+
+Background: 
+In the past few decades, there has been a rapid surge in the use of Next Generation Sequencing techniques, which have also become increasingly accessible to researchers. As a result, RNA sequencing pipelines are now more needed than ever to convert sequencing reads to RNA levels for downstream applications. In our program, we make use of FAST-QC for preliminary evaluation and filtering of raw data. We also present a user-friendly program that utilizes simple input parameters and a wrapper code that automates the use of multiple tools. Furthermore, we also present a detailed instruction readme file that will enable a person without specific technical, computer or bioinformatics skills to perform a complete and complex RNA-Seq analysis. To our knowledge, several pipeline tools have been implemented for RNA-seq data analysis. Some of these other tools include aRNApipe which uses HPC environments using IBM Platform LSF to conduct a broad range of RNA-seq primary analyses, RAP (RNA-Seq Analysis Pipeline) a cloud computing web application that identifies and quantifies expressed genes and transcripts  and detects alternative splicing events and chimeric transcripts, and  “iMIR” which integrates multiple open source modules/resources and implements statistical approaches, combined in an automated flow for high-throughput smallRNA-Seq data analysis. Our project, in addition to being more user friendly does not require an HPC (High Performance Computing) environment nor a complex web interface. This fully automated analysis workflow is put forth to analyze sequencing data in several steps, each one addressing a particular task. 
+
+Implementation: 
+The files that we are dealing with are given to us in a FASTQ format, a format that is commonly used to store biological sequences. First we use the CUTADAPT tool in order to trim unreliable portions of the sequencing reads. Then we use FASTQC for quality control and to find the quality score per read. Afterwards, we use the STAR tool which allows for the alignment of reads to the reference genome Homo sapiens GRCh38. The next step is the use of SAMTOOLS to organize the data that is now in BAM format. Subsequently, we then use RNASEQC in order to conduct RNA sequence analysis and find the FPKM (Fragments Per Kilobase of transcript per Million reads) We then use the RSEQC tool for the same purpose of conducting RNA sequence analysis and finding the FPKM. The final step was for us to compare FPKM for both RNASEQC and RSEQC. 
+ 
+Results: 
+
+
+References: 
+1) aRNApipe: A balanced, efficient and distributed pipeline for processing RNA-seq data in high performance computing environments Arnald Alonso, Brittany N. Lasseigne, Kelly Williams, Josh Nielsen, Ryne C. Ramaker,Andrew A Hardigan, Bobbi Johnston, Brian S. Roberts, Sara J. Cooper, Sara Marsal,Richard M. Myers bioRxiv 060277; doi: https://doi.org/10.1101/060277
+
+2) D’Antonio M, D’Onorio De Meo P, Pallocca M, et al. RAP: RNA-Seq Analysis Pipeline, a new cloud-based NGS web application. BMC Genomics. 2015;16(Suppl 6):S3. doi:10.1186/1471-2164-16-S6-S3.
+
+3) Giurato, Giorgio, Maria De Filippo, Antonio Rinaldi, Adnan Hashim, Giovanni Nassa, Maria Ravo, Francesca Rizzo, Roberta Tarallo, and Alessandro Weisz. "IMir: An Integrated Pipeline for High-throughput Analysis of Small Non-coding RNA Data Obtained by SmallRNA-Seq." BMC Bioinformatics 14.1 (2013): 362. Web.
+
+
